@@ -5,7 +5,7 @@ from game.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, F
 from game.components.spaceship import Spaceship
 
 class Game:
-    def __init__(self):
+    def __init__(self, bullet_manager=None):
         pygame.init()
         pygame.display.set_caption(TITLE)
         pygame.display.set_icon(ICON)
@@ -15,10 +15,10 @@ class Game:
         self.game_speed = 10
         self.x_pos_bg = 0
         self.y_pos_bg = 0
-        self.player = Spaceship()
+        self.player =Spaceship()
         self.enemy_manager = EnemyManager()
         self.bullet_manager= BulletManager()
-
+        
 
     def run(self):
         # Game loop: events - update - draw
@@ -34,10 +34,12 @@ class Game:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.playing = False
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                self.player.shoot(self.bullet_manager)
 
     def update(self):
         user_input = pygame.key.get_pressed()
-        self.player.update(user_input)
+        self.player.update(user_input, self)
         self.enemy_manager.update(self)
         self.bullet_manager.update(self)
 
