@@ -16,26 +16,28 @@ class Enemy(Sprite):
     MOVE_X_FOR_RANGE = (95, 200)
     SHOOTING_RANGE = 50
 
-    def __init__(self, bullet_manager=None):
+    def __init__(self, image = 1, speed_x = SPEED_X, speed_y = SPEED_Y, move_x_for = [30, 100]):
         super().__init__()
-        self.bullet_manager = bullet_manager
+        
         
         if random.random() < 0.5:
             enemy_image = ENEMY_1
         else:
             enemy_image = ENEMY_2
         
-        self.image = pygame.transform.scale(enemy_image, (self.SHIP_WIDTH, self.SHIP_HEIGHT))
+        self.image = self.IMAGE[image]
+        self.image = pygame.transform.scale(self.image,(self.SHIP_WIDTH, self.SHIP_HEIGHT))
         self.rect = self.image.get_rect()
-        self.rect.x = random.choice(self.X_POS_LISTA)
         self.rect.y = self.Y_POS
-        self.speed_x = self.SPEED_X
-        self.speed_y = self.SPEED_Y
-        self.movement_x = self.MOV_X[random.randint(0, 1)]
-        self.move_x_for = random.randint(*self.MOVE_X_FOR_RANGE)
+        self.rect.x = self.X_POS_LIST[random.randint(0, 10)]
+        self.speed_x = speed_x
+        self.speed_y = speed_y
+        self.movement_x = self.MOV_X[random.randint(0,1)]
+        self.move_x_for = random.randint(move_x_for[0], move_x_for[1])
         self.index = 0
         self.type = 'enemy'
-        self.shooting_time = 50
+        self.shooting_time = random.randint(30, 50)
+
 
     def update(self, ships, game):
         self.rect.y += self.speed_y
