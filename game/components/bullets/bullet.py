@@ -16,6 +16,8 @@ class Bullet(Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = spaceship.rect.center
         self.owner = spaceship.type
+        self.ship_owner = spaceship.name
+        self.owner = spaceship.type
 
 
     def update(self, bullets):

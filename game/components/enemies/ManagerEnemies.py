@@ -3,13 +3,13 @@ from game.components.bullets.bullet import Bullet
 from game.components.bullets.bullet_manager import BulletManager
 
 from game.components.enemies.enemies import Enemy
-from game.utils.constants import SCREEN_HEIGHT
+from game.utils.constants import NUMBER_OF_ENEMIES, SCREEN_HEIGHT
 
 class EnemyManager:
     def __init__(self):
         self.bullet_manager = BulletManager()
         self.enemies = []
-        self.max_enemies = 5
+        #self.max_enemies = 5
 
     def update(self, game,):
         self.add_enemy()
@@ -29,21 +29,27 @@ class EnemyManager:
             enemy.draw(screen)
 
     def add_enemy(self):
-        if len(self.enemies) < self.max_enemies:
+        '''if len(self.enemies) < self.max_enemies:
             num_new_enemies = self.max_enemies - len(self.enemies)
             for _ in range(num_new_enemies):
                 enemy = Enemy(bullet_manager = self.bullet_manager)
-                self.enemies.append(enemy)
-                ''' enemy_type = random.randint(1, 2)
-                if enemy_type == 1:
-                    enemy = Enemy(enemy_type, bullet_manager=self.bullet_manager)
-                else:
-                    x_speed = 5
-                    y_speed = 2
-                    move_x_for = [50, 120]
-                    enemy = Enemy(enemy_type, x_speed, y_speed, move_x_for, bullet_manager=self.bullet_manager)
-                '''
-                #self.enemies.append(enemy)
+                self.enemies.append(enemy)'''
+        enemy_type = random.randint(1, 2)
+        if enemy_type == 1:
+            enemy = Enemy(enemy_type, bullet_manager=self.bullet_manager)
+        else:
+            x_speed = 5
+            y_speed = 2
+            move_x_for = [50, 150]
+            enemy = Enemy(enemy_type, x_speed, y_speed, move_x_for, bullet_manager=self.bullet_manager)
+            
+        if len (self.enemies) < NUMBER_OF_ENEMIES:
+             self.enemies.append(enemy)
+
+    
+    def reset(self):
+             self.enemies = []
+    
 
     
         
