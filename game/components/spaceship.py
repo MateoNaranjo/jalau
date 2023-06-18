@@ -4,6 +4,7 @@ from game.components.bullets.bullet import Bullet
 from pygame.sprite import Sprite
 from game.components.bullets.bullet_manager import BulletManager
 from game.utils.constants import SCREEN_WIDTH,  SCREEN_HEIGHT,SPACESHIP
+
 class Spaceship(Sprite):
     SHIP_WIDTH = 40
     SHIP_HEIGHT = 60
@@ -19,9 +20,6 @@ class Spaceship(Sprite):
         self.rect.x = self.X_POS
         self.rect.y = self.Y_POS
         self.type = 'player'
-        
-      
-        #self.bullet_manager.add_bullet(self)
         
     def update(self, user_input, game):
         if user_input[pygame.K_LEFT]:
